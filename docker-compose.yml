@@ -1,7 +1,14 @@
 services:
-  website:
+  builder:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/builder.Dockerfile
+  website:
+    build:
+      no_cache: true
+      context: .
+      dockerfile: docker/website.Dockerfile
+      additional_contexts:
+        builder: "service:builder"
     ports:
       - 8080:80
