@@ -1,5 +1,6 @@
 services:
   builder:
+    image: builder
     build:
       context: .
       dockerfile: docker/builder.Dockerfile
@@ -7,8 +8,10 @@ services:
     build:
       no_cache: true
       context: .
+      args:
+        SERVER_NAME:
       dockerfile: docker/website.Dockerfile
-      additional_contexts:
-        builder: "service:builder"
     ports:
-      - 8080:80
+      - ${PORT}:80
+    depends_on:
+      - builder
