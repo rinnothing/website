@@ -11,7 +11,14 @@ services:
       args:
         SERVER_NAME:
       dockerfile: docker/website.Dockerfile
+    container_name: service_website
     ports:
       - ${PORT}:80
     depends_on:
       - builder
+
+# # uncomment this if you want to use https
+# networks:
+#   default:
+#     external: true
+#     name: proxy-manager
