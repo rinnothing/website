@@ -16,6 +16,7 @@ services:
       - ${PORT}:80
     depends_on:
       - builder
+    restart: unless-stopped
 
 # # uncomment this if you want to use https
 # networks:
